@@ -1,0 +1,639 @@
+$Header: 'Cabin', sans-serif;
+$Para: 'PT Sans', sans-serif;
+$white: #fff;
+$blue: #0B264A;
+$brown: #E19E00;
+
+@mixin details($choice) {
+  @if $choice == 'body'{
+    
+    perspective: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+    
+
+    @media screen and (max-width: 750px) {
+      flex-direction: column;
+      margin: 25vh 0;
+    }
+
+  } @else if $choice == 'carousel'{
+    
+    transition: 1s ease;
+    transform: rotateY(-30deg);
+    
+    &:hover{
+      transform: rotateY(0deg);
+    }
+
+    @media screen and (max-width: 750px) {
+      transform: rotateY(0deg);
+    }
+
+  } 
+  
+  @else{
+    list-style: none;
+    background: white;
+    border: 5px solid $brown;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: rotateY(30deg);
+    transition: 500ms ease;
+
+    h1{
+      font-family: $Header;
+    }
+
+    li{
+      font-family: $Para;
+    }
+
+    &:hover{
+      transform: rotateY(0deg);
+    }
+
+    @media screen and (max-width: 750px){
+      width: 90%;
+      padding-bottom: 1.5rem;
+      transform: rotateY(0deg);
+      margin: auto;
+      margin: 10vh 0;
+    }
+  }
+}
+
+@mixin  button {
+  background: $brown;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border: none;
+  padding: 1rem;
+  color: $blue;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+html{
+  scroll-behavior: smooth;
+  height: 100vh;
+  scroll-snap-type: mandatory y;
+
+  body{
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/bg.webp');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  a{
+    text-decoration: none;
+  }
+}
+
+section{
+  scroll-snap-align: start;
+  // height: 100vh;
+}
+
+header{
+  transition: 1s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  letter-spacing: .1rem;
+  font-family: $Para;
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  transition: 1s ease;
+
+  .text{
+    color: $blue;
+  }
+
+  .navToggle{
+    background: $blue;
+    width: 40px;
+    height: 5px;
+    cursor: pointer;
+    display: none;
+    margin-right: 2rem;
+    transition: 1s ease;
+    border: none;
+    position: relative;
+
+    &::before, &::after{
+      content: '';
+      background: inherit;
+      width: 40px;
+      height: 5px;
+      z-index: 1;
+      position: absolute;
+      left: 0;
+    }
+
+    &::after{
+      transform: translate(0, 10px);
+    }
+
+    &::before{
+      transform: translate(0, -15px);
+    }
+
+  }
+
+  nav{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+
+    #contact{
+      display: none;
+    }
+  }
+
+  #contact_us{
+    background: $brown;
+    transition: 1s ease;
+    font-weight: 500;
+    padding: 1rem 2rem;
+    margin-right: 2rem;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 750px){
+    &{
+      z-index: 99;
+
+      .text:active{
+        background: $blue;
+        padding: 2rem;
+        color:white;
+      }
+  
+      .navToggle{
+        display: inline;
+      }
+  
+      nav{
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background-color: $brown;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        z-index: -1;
+        font-size: 1.5rem;
+        transition: 1s ease;
+        
+        #contact{
+          display: inline;
+          font-weight: 600;
+        }
+    
+      }
+    
+      & #contact_us{
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1500px){
+    padding: 1rem 10rem;
+
+    #contact_us{
+      margin-right: 20rem;
+    }
+
+  }
+
+}
+
+.header_bg{
+  background: $brown;
+  transition: 1s ease;
+
+  #contact_us{
+    transition: 1s ease;
+    background: $blue;
+    color: $brown;
+  }
+}
+
+#banner{
+  height: 100vh;
+  display: flex;
+  position: relative;
+  background: white;
+
+  .banner_title{
+    position: absolute;
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
+    padding: 2.5rem;
+    left: 5rem;
+    z-index: 1  ;
+    color: $blue;
+    top: 50%;
+    transform: translate(5rem, -50%);
+
+    h1{
+      font-family: $Header;
+      font-size: 3rem;
+    }
+
+    p{
+      font-family: $Para;
+    }
+
+  }
+
+  .banner_img{
+    position: absolute;
+    right: 0;
+    background: url('../images/facad.jpg') no-repeat;
+    background-size:  cover;
+    background-position: top center;
+    background-attachment: fixed;
+    height: 100%;
+    width: 75%;
+    display: grid;
+    grid-template-columns: repeat(3,calc( 100% /3 ));
+    grid-template-rows: repeat(3, calc( 100% / 3 ));
+
+    & > *{
+      border: 5px solid white;
+    }
+
+    .white{
+      background: white;
+    }
+
+    .grad{
+      background-image: linear-gradient( 90deg, white, rgba(white, 0));
+    }
+    
+  }
+
+  &::before{
+    content: '';
+    border: 10px solid $brown;
+    width: 50%;
+    height: 60%;
+    position: absolute;
+    top: 50%;
+    transform: translate(1rem, -50%);
+  }
+
+  @media screen and (max-width:750px) {
+    &{
+      // background-color: ;
+  
+      & .banner_title{
+        background-color: white;
+        border: 5px solid $brown;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    
+      & .banner_img{
+        background-image: url('../images/facad.webp');
+        width: 100%;
+    
+        .white{
+          background: none;
+        }
+    
+        .grad{
+          background-image: none;
+        }
+        
+      }
+    
+      &::before{
+        display: none;
+      }
+    
+    }
+  }
+
+  @media screen and (min-width: 1500px){
+    
+    padding: 1rem 10rem;
+
+    .banner_title{
+      left: 20rem;
+  
+      h1{
+        font-size: 3rem;
+      }  
+    }
+
+  }
+}
+
+#brochure{
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: 100vh;
+
+  .brochure_img{
+    width: 50%;
+    background: url('../images/amenity (9).webp') no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: right center;
+    height: 75%;
+  }
+
+  .brochure_text{
+    width: 50%;
+    height: 50%;
+    border: 10px solid $brown;
+    border-left: none;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2{
+      font-family: $Header;
+      text-transform: uppercase;
+    }
+
+    p{
+      font-family: $Para;
+      text-align: justify;
+    }
+
+    // brochure btn
+    a{
+      width: fit-content;
+      @include button();
+    }
+
+  }
+
+  h1{
+    writing-mode: vertical-lr;
+    letter-spacing: 1rem;
+  }
+
+  @media screen and (max-width: 750px) {
+    &{
+      background: url('../images/amenity (9).webp') no-repeat;
+      background-attachment:fixed;
+      z-index: 1;
+      color: white;
+      position: relative;
+  
+      &::before{
+        content: '';
+        background: inherit;
+        filter: blur(1px);
+        box-shadow: inset 0 0 0 2000px rgba( black, .5);
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        z-index: -1;
+      }
+    
+      .brochure_img{
+        display: none;
+      }
+    
+      .brochure_text{
+        margin: auto;
+        width: 75%;
+        text-align: center;
+        border: 5px solid $brown;
+    
+        button{
+          margin: auto;
+        }
+    
+      }
+    
+      h1{
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1500px){
+    
+    padding: 1rem 10rem;
+
+  }
+}
+
+#details{
+  padding: 0 1rem;
+  position: relative;
+
+  .swiper{
+    width: 50%;
+    height: 60vh;
+    margin: 0;
+    border: 5px solid $brown;
+    @include details('carousel');
+    
+
+    .amenity-size{
+      width: 100%;
+      height: 100%;
+    }
+
+    @media screen and (max-width: 750px) {
+      width: 100%;
+
+      .amenity-size{
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    @media screen and (min-width: 750px ) and (max-width: 1190px) {
+      width: 100%;
+      height: 40vh;
+    }
+
+
+
+    @media screen and (min-width: 1500px){
+      width: 50%;
+    }
+    
+  }
+
+  .units{
+    @include details('body');
+
+    .unit-type{
+      @include details('detail');
+      
+    }
+  }
+
+  .amenity{
+    @include details('body');
+    
+    .amenities{
+      @include details('detail');
+    }
+  }
+
+  .price{
+    border: 5px solid $brown;
+    text-align: center;
+    padding: 1rem 0;
+    color: $blue;
+    font-size: 1.2rem;
+
+    h3{
+      font-family: $Header;
+      text-transform: uppercase;
+    }
+
+    p{
+      font-family: $Para;
+    }
+  }
+
+  @media screen and (min-width: 1500px){
+    
+    padding: 1rem 10rem;
+
+  }
+  
+}
+
+#contact-us{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  margin-top: 5rem;
+  position: relative;
+
+  form{
+    background: $blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    width: 25%;
+    color: white;
+
+    h1{
+      font-family: $Header;
+      letter-spacing: 3px;
+    }
+
+    p{
+      font-family: $Para;
+    }
+
+    // mobile number
+    .mobile_number{
+
+      display: flex;
+      align-items: center;
+      color: $blue;
+      margin: .5rem 0;
+
+      .default_number{
+        width: 150px;
+        background: white;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input[type=number]{
+        appearance: textfield;
+        width: 100%;
+        height: 18px;
+        // height: inherit;
+      }
+    }
+
+    input{
+      margin: .5rem 0;
+      width: 100%;
+      padding: 1rem;
+      font-family: $Para;
+      outline: none;
+
+      // reset
+      border: none;
+      appearance: none;
+    }
+
+    input[type=submit]{
+      @include button();
+    }
+
+  }
+
+  .video-container{
+    width: 75%;
+    height: 100%;
+    overflow: hidden;
+
+    .wh-vid{
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+    padding: 0;
+
+    form{
+      order: 2;
+      width: 75%;
+      margin: auto;
+      padding-bottom: 20px;
+
+      .mobile_number{
+        width: 100%;
+        margin: 0;
+      }
+    }
+    
+    .video-container{
+      order: 1;
+      width: 100%;
+    }
+
+
+  }
+
+  
+  @media screen and (min-width: 1500px){
+    padding: 1rem 10rem;
+    
+  }
+}
