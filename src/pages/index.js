@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { Helmet } from 'react-helmet'
@@ -27,13 +27,16 @@ const IndexPage = () => {
     setNavToggle(!navToggle)
   }
 
-  window.addEventListener('scroll',() => {
 
-    const height = window.scrollY;
+  useEffect(() => {
+    window.addEventListener('scroll',() => {
 
-    if( height > 10 ) setNavScroll(true)
-    else setNavScroll(false)
-  })
+      const height = window.scrollY;
+  
+      if( height > 10 ) setNavScroll(true)
+      else setNavScroll(false)
+    })
+  }, [])
 
   return(
 
